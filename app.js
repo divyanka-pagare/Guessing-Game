@@ -66,20 +66,27 @@ function checkGuess() {
 
     let guess = parseInt(input.value);
 
-    if (!guess) {
+    if (isNaN(guess)) {
         message.innerText = "❌ Enter a valid number!";
+        return;
+    }
+
+    if (guess < 1 || guess > maxRange) {
+        message.innerText = `⚠️ Enter a number between 1 and ${maxRange}`;
         return;
     }
 
     attempts++;
 
     if (guess < randomNum) {
+        low = guess;
         message.innerText = "📉 Too low!";
         message.style.color = "orange";
         wrongSound.play();
         shake(input);
     } 
     else if (guess > randomNum) {
+        high = guess;
         message.innerText = "📈 Too high!";
         message.style.color = "red";
         wrongSound.play();
@@ -97,6 +104,21 @@ function checkGuess() {
 
         clearInterval(timerInterval);
         input.disabled = true;
+        return;
+    }
+
+    // 🔥 Close Hint
+    if (Math.abs(guess - randomNum) <= 5) {
+        message.innerText += " 🔥 Very close!";
+    }
+
+    // 🧠 Bonus Hint after 8 attempts
+    if (attempts === 8) {
+        if (randomNum % 2 === 0) {
+            message.innerText += " 💡 Hint: Number is EVEN";
+        } else {
+            message.innerText += " 💡 Hint: Number is ODD";
+        }
     }
 
     attemptsText.innerText = `Attempts: ${attempts}`;
@@ -179,6 +201,21 @@ window.onclick = function(event) {
     }
 };
 
+let low = 1;
+let high = maxRange;
+
+if (guess < randomNum) {
+    low = guess;
+    message.innerText = `📉 Too low! Try between ${low} and ${high}`;
+} else if (guess > randomNum) {
+    high = guess;
+    message.innerText = `📈 Too high! Try between ${low} and ${high}`;
+}
+
+// 🔥 Close hint
+if (Math.abs(guess - randomNum) <= 10) {
+    message.innerText += " 🔥 Very close!";
+}
 
 // ⌨️ Enter Support
 document.getElementById("guessInput").addEventListener("keypress", function(e) {
