@@ -11,13 +11,13 @@ body {
 
 /* 📦 Main Container */
 .card {
-  width: 80%;
+  width: 95%;
   max-width: 900px;
-  height: 80vh;
+  min-height: 90vh;   /* ✅ dynamic height */
+  padding: 20px;
   background: white;
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  padding: 30px;
   position: relative;
 }
 
@@ -57,8 +57,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100%;
+  justify-content: flex-start;  /* ✅ key fix */
+  padding-top: 80px;            /* ✅ push content up */
+  text-align: center;
 }
 
 /* ✏️ Input */
@@ -179,30 +180,27 @@ body.dark select {
 
 /* 📱 Mobile */
 @media (max-width: 600px) {
-  .card {
-    padding: 15px;
+  body {
+    align-items: flex-start; 
   }
 
-  h1 {
-    font-size: 20px;
+  .card {
+    width: 100%;
+    min-height: 100vh;      
+    border-radius: 0;       
+  }
+
+  .game-content {
+    padding-top: 100px;
   }
 
   input {
+    width: 90%;
     font-size: 16px;
   }
 
   button {
-    font-size: 14px;
-  }
-
-  .top-panel {
-    top: 10px;
-    right: 10px;
-  }
-
-  .top-left {
-    top: 10px;
-    left: 10px;
+    width: 90%;
   }
 }
 
