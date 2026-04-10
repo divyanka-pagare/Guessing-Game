@@ -3,95 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <title>Guess The Number 🎯</title>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #6366f1, #9333ea);
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      text-align: center;
-      width: 300px;
-    }
-
-    h1 {
-      margin-bottom: 10px;
-    }
-
-    p {
-      color: #555;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 15px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      outline: none;
-      font-size: 16px;
-    }
-
-    input:focus {
-      border-color: #6366f1;
-    }
-
-    button {
-      width: 100%;
-      margin-top: 15px;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      background: #6366f1;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: #4f46e5;
-    }
-
-    #message {
-      margin-top: 15px;
-      font-weight: bold;
-    }
-
-    #attempts {
-      font-size: 14px;
-      margin-top: 5px;
-    }
-
-    .restart {
-      background: transparent;
-      color: #6366f1;
-    }
-
-    .restart:hover {
-      text-decoration: underline;
-      background: transparent;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <div class="card">
-    <h1>🎯 Guess The Number</h1>
-    <p>Pick a number between 1 and 100</p>
 
-    <input type="number" id="guessInput" placeholder="Enter your guess">
+  <!-- 🔝 Top Right Panel -->
+  <div class="top-panel">
+    <select id="difficulty">
+      <option value="easy">Easy</option>
+      <option value="medium" selected>Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+
+    <p id="timer"></p>
+    <p id="score"></p>
+  </div>
+
+  <!-- 📘 Rules Modal -->
+  <div id="rulesModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeRules()">×</span>
+
+    <h2>🎯 How to Play</h2>
+    <ul>
+      <li>Select a difficulty level (Easy / Medium / Hard)</li>
+      <li>Click "Start Game" to begin</li>
+      <li>Guess the number within the given range</li>
+      <li>Get hints: Too High 📈 or Too Low 📉</li>
+      <li>You have limited time ⏱ to guess</li>
+      <li>Score depends on fewer attempts 🏆</li>
+      <li>Try to beat your best score!</li>
+    </ul>
+  </div>
+  </div>
+
+  <!-- 🔝 Top Left Controls -->
+  <div class="top-left">
+  <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
+  <button class="info-btn" onclick="openRules()">ℹ️</button>
+  </div>
+
+  <!-- 🎮 Main Game -->
+  <div class="game-content">
+    <h1>🎯 Guess The Number</h1>
+    <p id="rangeText">Pick a number between 1 and 100</p>
+
+    <button onclick="startGame()">🚀 Start Game</button>
+
+    <input type="number" id="guessInput" placeholder="Enter your guess" disabled>
 
     <button onclick="checkGuess()">Submit Guess</button>
 
@@ -99,7 +61,10 @@
     <p id="attempts"></p>
 
     <button class="restart" onclick="restartGame()">🔄 Restart</button>
+    
   </div>
+
+</div>
   <script src="app.js"></script>
 </body>
 </html>

@@ -1,0 +1,220 @@
+/* 🌐 Base Reset */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #6366f1, #9333ea);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 📦 Main Container */
+.card {
+  width: 80%;
+  max-width: 900px;
+  height: 80vh;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  position: relative;
+}
+
+/* 🔝 Top Panels */
+.top-panel {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  text-align: right;
+}
+
+.top-left {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+/* 🎯 Difficulty Dropdown */
+.top-panel select {
+  width: 140px;
+  padding: 6px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+/* 📊 Timer & Score */
+#timer,
+#score {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* 🎮 Game Content */
+.game-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* ✏️ Input */
+input {
+  width: 250px;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 30px;
+}
+
+/* 🔘 Buttons (Base) */
+button {
+  width: 260px;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #6366f1;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background: #4f46e5;
+}
+
+/* 🔄 Restart Button */
+.restart {
+  background: transparent;
+  color: #6366f1;
+}
+
+.restart:hover {
+  text-decoration: underline;
+}
+
+/* 🔘 Icon Buttons (Top Left) */
+.toggle-btn,
+.info-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #6366f1;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-btn:hover,
+.info-btn:hover {
+  background: #4f46e5;
+}
+
+/* 💬 Message */
+#message {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+/* 📘 Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background: white;
+  width: 350px;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 12px;
+  position: relative;
+  text-align: left;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.modal-content ul {
+  padding-left: 20px;
+}
+
+.modal-content li {
+  margin: 8px 0;
+}
+
+/* 🌙 Dark Mode */
+body.dark {
+  background: #111;
+  color: white;
+}
+
+body.dark .card,
+body.dark .modal-content {
+  background: #222;
+}
+
+body.dark input,
+body.dark select {
+  background: #333;
+  color: white;
+  border: 1px solid #555;
+}
+
+/* 📱 Mobile */
+@media (max-width: 600px) {
+  .card {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  input {
+    font-size: 16px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+
+  .top-panel {
+    top: 10px;
+    right: 10px;
+  }
+
+  .top-left {
+    top: 10px;
+    left: 10px;
+  }
+}
+
+/* 📱 Extra Small Devices */
+@media (max-width: 400px) {
+  .top-panel select {
+    width: 100px;
+    font-size: 12px;
+  }
+
+  #timer,
+  #score {
+    font-size: 12px;
+  }
+}
