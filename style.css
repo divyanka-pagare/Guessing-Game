@@ -1,218 +1,196 @@
-/* 🌐 Base Reset */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #6366f1, #9333ea);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  * { box-sizing: border-box; }
 
-/* 📦 Main Container */
-.card {
-  width: 95%;
-  max-width: 900px;
-  min-height: 90vh;   /* ✅ dynamic height */
-  padding: 20px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  position: relative;
-}
-
-/* 🔝 Top Panels */
-.top-panel {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  text-align: right;
-}
-
-.top-left {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  display: flex;
-  gap: 10px;
-}
-
-/* 🎯 Difficulty Dropdown */
-.top-panel select {
-  width: 140px;
-  padding: 6px;
-  font-size: 14px;
-  border-radius: 6px;
-}
-
-/* 📊 Timer & Score */
-#timer,
-#score {
-  font-size: 14px;
-  margin-top: 5px;
-}
-
-/* 🎮 Game Content */
-.game-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;  /* ✅ key fix */
-  padding-top: 80px;            /* ✅ push content up */
-  text-align: center;
-}
-
-/* ✏️ Input */
-input {
-  width: 250px;
-  padding: 10px;
-  margin-top: 15px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 30px;
-}
-
-/* 🔘 Buttons (Base) */
-button {
-  width: 260px;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 8px;
-  border: none;
-  background: #6366f1;
-  color: white;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-button:hover {
-  background: #4f46e5;
-}
-
-/* 🔄 Restart Button */
-.restart {
-  background: transparent;
-  color: #6366f1;
-}
-
-.restart:hover {
-  text-decoration: underline;
-}
-
-/* 🔘 Icon Buttons (Top Left) */
-.toggle-btn,
-.info-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #6366f1;
-  color: white;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.toggle-btn:hover,
-.info-btn:hover {
-  background: #4f46e5;
-}
-
-/* 💬 Message */
-#message {
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-/* 📘 Modal */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-  background: white;
-  width: 350px;
-  margin: 10% auto;
-  padding: 20px;
-  border-radius: 12px;
-  position: relative;
-  text-align: left;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 22px;
-  cursor: pointer;
-}
-
-.modal-content ul {
-  padding-left: 20px;
-}
-
-.modal-content li {
-  margin: 8px 0;
-}
-
-/* 🌙 Dark Mode */
-body.dark {
-  background: #111;
-  color: white;
-}
-
-body.dark .card,
-body.dark .modal-content {
-  background: #222;
-}
-
-body.dark input,
-body.dark select {
-  background: #333;
-  color: white;
-  border: 1px solid #555;
-}
-
-/* 📱 Mobile */
-@media (max-width: 600px) {
   body {
-    align-items: flex-start; 
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6366f1, #9333ea);
+    min-height: 100vh;
+    min-height: 100dvh; /* fixes iOS/Android address-bar height jump */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
   }
 
   .card {
     width: 100%;
-    min-height: 100vh;      
-    border-radius: 0;       
+    max-width: 420px;
+    padding: 24px 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
+  /* Top row: difficulty/stats sit in normal flow; icon buttons stay absolutely positioned like the original */
+  .top-row {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .top-left {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .top-panel {
+    text-align: right;
+  }
+
+  .top-panel select {
+    width: 120px;
+    padding: 8px 6px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  #timer, #score {
+    font-size: 13px;
+    margin: 4px 0 0;
+  }
+
+  .toggle-btn, .info-btn {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    background: #6366f1;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .toggle-btn:hover, .info-btn:hover { background: #4f46e5; }
+
   .game-content {
-    padding-top: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: clamp(1.25rem, 5vw, 1.6rem);
+    margin: 4px 0 8px;
+  }
+
+  #rangeText {
+    font-size: clamp(0.9rem, 3.5vw, 1rem);
+    margin: 0 0 16px;
+    color: #333;
   }
 
   input {
-    width: 90%;
-    font-size: 16px;
+    width: 100%;
+    max-width: 260px;
+    padding: 12px;
+    margin-top: 4px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  input:focus {
+    outline: 2px solid #6366f1;
+    outline-offset: 1px;
   }
 
   button {
-    width: 90%;
+    width: 100%;
+    max-width: 260px;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 8px;
+    border: none;
+    background: #6366f1;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    min-height: 44px; /* comfortable tap target */
   }
-}
 
-/* 📱 Extra Small Devices */
-@media (max-width: 400px) {
-  .top-panel select {
-    width: 100px;
-    font-size: 12px;
+  button:hover { background: #4f46e5; }
+  button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .restart {
+    background: transparent;
+    color: #6366f1;
   }
 
-  #timer,
-  #score {
-    font-size: 12px;
+  .restart:hover { text-decoration: underline; background: transparent; }
+
+  #message {
+    margin-top: 14px;
+    font-weight: bold;
+    min-height: 22px;
+    font-size: 15px;
   }
-}
+
+  #attempts {
+    margin-top: 4px;
+    font-size: 14px;
+    color: #555;
+  }
+
+  /* Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    padding: 16px;
+  }
+
+  .modal-content {
+    background: white;
+    width: 100%;
+    max-width: 340px;
+    margin: 15vh auto 0;
+    padding: 20px;
+    border-radius: 12px;
+    position: relative;
+    text-align: left;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  .modal-content ul { padding-left: 20px; margin: 12px 0 0; }
+  .modal-content li { margin: 8px 0; }
+
+  /* Dark mode */
+  body.dark { background: #111; }
+  body.dark .card, body.dark .modal-content { background: #222; color: #eee; }
+  body.dark input, body.dark select { background: #333; color: white; border: 1px solid #555; }
+  body.dark #rangeText { color: #ccc; }
+  body.dark #attempts { color: #aaa; }
+
+  /* Small phones */
+  @media (max-width: 340px) {
+    .card { padding: 18px 14px; }
+    .top-panel select { width: 100px; font-size: 12px; }
+    #timer, #score { font-size: 12px; }
+  }

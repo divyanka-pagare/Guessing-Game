@@ -1,225 +1,423 @@
+// let randomNum;
+// let attempts;
+// let maxRange;
+// let timeLeft;
+// let timerInterval;
+// let score = 0;
+
+// // 🔊 Sound Effects
+// const correctSound = new Audio("https://www.soundjay.com/buttons/sounds/button-3.mp3");
+// const wrongSound = new Audio("https://www.soundjay.com/buttons/sounds/button-10.mp3");
+
+// // 🎯 Start Game
+// function startGame() {
+
+//     const difficulty = document.getElementById("difficulty").value; // ✅ FIX
+//     const rangeText = document.getElementById("rangeText");
+
+//     if (difficulty === "easy") {
+//         maxRange = 50;
+//         timeLeft = 30;
+//     } else if (difficulty === "medium") {
+//         maxRange = 100;
+//         timeLeft = 45;
+//     } else {
+//         maxRange = 500;
+//         timeLeft = 60;
+//     }
+
+//     // 🔥 Update UI dynamically
+//     rangeText.innerText = `Pick a number between 1 and ${maxRange}`;
+
+//     randomNum = Math.floor(Math.random() * maxRange) + 1;
+//     attempts = 0;
+//     score = 0;
+
+//     document.getElementById("message").innerText = "";
+//     document.getElementById("attempts").innerText = "";
+//     document.getElementById("score").innerText = "Score: 0";
+//     document.getElementById("guessInput").disabled = false;
+
+//     startTimer();
+// }
+
+// // ⏱ Timer
+// function startTimer() {
+//     clearInterval(timerInterval);
+
+//     timerInterval = setInterval(() => {
+//         timeLeft--;
+//         document.getElementById("timer").innerText = `⏱ Time Left: ${timeLeft}s`;
+
+//         if (timeLeft <= 0) {
+//             clearInterval(timerInterval);
+//             document.getElementById("message").innerText = "⏰ Time's up!";
+//             document.getElementById("guessInput").disabled = true;
+//         }
+//     }, 1000);
+// }
+
+// // 🎮 Guess Logic
+// function checkGuess() {
+//     const input = document.getElementById("guessInput");
+//     const message = document.getElementById("message");
+//     const attemptsText = document.getElementById("attempts");
+//     const scoreText = document.getElementById("score");
+
+//     let guess = parseInt(input.value);
+
+//     if (isNaN(guess)) {
+//         message.innerText = "❌ Enter a valid number!";
+//         return;
+//     }
+
+//     if (guess < 1 || guess > maxRange) {
+//         message.innerText = `⚠️ Enter a number between 1 and ${maxRange}`;
+//         return;
+//     }
+
+//     attempts++;
+
+//     if (guess < randomNum) {
+//         low = guess;
+//         message.innerText = "📉 Too low!";
+//         message.style.color = "orange";
+//         wrongSound.play();
+//         shake(input);
+//     } 
+//     else if (guess > randomNum) {
+//         high = guess;
+//         message.innerText = "📈 Too high!";
+//         message.style.color = "red";
+//         wrongSound.play();
+//         shake(input);
+//     } 
+//     else {
+//         message.innerText = `🎉 Correct! Number was ${randomNum}`;
+//         message.style.color = "green";
+//         correctSound.play();
+
+//         score = Math.max(0, 100 - attempts * 5);
+//         scoreText.innerText = `Score: ${score}`;
+
+//         saveBestScore(score);
+
+//         clearInterval(timerInterval);
+//         input.disabled = true;
+//         return;
+//     }
+
+//     // 🔥 Close Hint
+//     if (Math.abs(guess - randomNum) <= 5) {
+//         message.innerText += " 🔥 Very close!";
+//     }
+
+//     // 🧠 Bonus Hint after 8 attempts
+//     if (attempts === 8) {
+//         if (randomNum % 2 === 0) {
+//             message.innerText += " 💡 Hint: Number is EVEN";
+//         } else {
+//             message.innerText += " 💡 Hint: Number is ODD";
+//         }
+//     }
+
+//     attemptsText.innerText = `Attempts: ${attempts}`;
+//     input.value = "";
+// }
+
+// // 🏆 Save Best Score
+// function saveBestScore(currentScore) {
+//     let best = localStorage.getItem("bestScore") || 0;
+
+//     if (currentScore > best) {
+//         localStorage.setItem("bestScore", currentScore);
+//         alert("🏆 New High Score!");
+//     }
+// }
+
+// // 🔄 Restart
+// function restartGame() {
+//     clearInterval(timerInterval);
+//     startGame();
+// }
+
+// // 🎨 Shake Animation
+// function shake(element) {
+//     element.style.transition = "0.1s";
+//     element.style.transform = "translateX(-5px)";
+//     setTimeout(() => {
+//         element.style.transform = "translateX(5px)";
+//     }, 100);
+//     setTimeout(() => {
+//         element.style.transform = "translateX(0)";
+//     }, 200);
+// }
+
+// // 🌙 Dark Mode
+// function toggleDarkMode() {
+//     document.body.classList.toggle("dark");
+
+//     const btn = document.querySelector(".toggle-btn");
+//     if (document.body.classList.contains("dark")) {
+//         btn.innerText = "☀️";
+//     } else {
+//         btn.innerText = "🌙";
+//     }
+// }
+
+
+// const difficultySelect = document.getElementById("difficulty");
+// const rangeText = document.getElementById("rangeText");
+
+// difficultySelect.addEventListener("change", function () {
+//     let selected = this.value;
+//     let tempRange;
+
+//     if (selected === "easy") {
+//         tempRange = 50;
+//     } else if (selected === "medium") {
+//         tempRange = 100;
+//     } else {
+//         tempRange = 500;
+//     }
+
+//     // 🔥 Instant UI update
+//     rangeText.innerText = `Pick a number between 1 and ${tempRange}`;
+// });
+
+// function openRules() {
+//     document.getElementById("rulesModal").style.display = "block";
+// }
+
+// function closeRules() {
+//     document.getElementById("rulesModal").style.display = "none";
+// }
+
+// // Close when clicking outside
+// window.onclick = function(event) {
+//     const modal = document.getElementById("rulesModal");
+//     if (event.target === modal) {
+//         modal.style.display = "none";
+//     }
+// };
+
+// let low = 1;
+// let high = maxRange;
+
+// if (guess < randomNum) {
+//     low = guess;
+//     message.innerText = `📉 Too low! Try between ${low} and ${high}`;
+// } else if (guess > randomNum) {
+//     high = guess;
+//     message.innerText = `📈 Too high! Try between ${low} and ${high}`;
+// }
+
+// // 🔥 Close hint
+// if (Math.abs(guess - randomNum) <= 10) {
+//     message.innerText += " 🔥 Very close!";
+// }
+
+// // ⌨️ Enter Support
+// document.getElementById("guessInput").addEventListener("keypress", function(e) {
+//     if (e.key === "Enter") {
+//         checkGuess();
+//     }
+// });
+
 let randomNum;
 let attempts;
 let maxRange;
 let timeLeft;
 let timerInterval;
 let score = 0;
+let low = 1;
+let high = 1;
 
 // 🔊 Sound Effects
 const correctSound = new Audio("https://www.soundjay.com/buttons/sounds/button-3.mp3");
 const wrongSound = new Audio("https://www.soundjay.com/buttons/sounds/button-10.mp3");
 
+function playSafe(audio) {
+  audio.currentTime = 0;
+  audio.play().catch(() => {}); // ignore autoplay-block errors
+}
+
 // 🎯 Start Game
 function startGame() {
+  const difficulty = document.getElementById("difficulty").value;
+  const rangeText = document.getElementById("rangeText");
 
-    const difficulty = document.getElementById("difficulty").value; // ✅ FIX
-    const rangeText = document.getElementById("rangeText");
+  if (difficulty === "easy") {
+    maxRange = 50;
+    timeLeft = 30;
+  } else if (difficulty === "medium") {
+    maxRange = 100;
+    timeLeft = 45;
+  } else {
+    maxRange = 500;
+    timeLeft = 60;
+  }
 
-    if (difficulty === "easy") {
-        maxRange = 50;
-        timeLeft = 30;
-    } else if (difficulty === "medium") {
-        maxRange = 100;
-        timeLeft = 45;
-    } else {
-        maxRange = 500;
-        timeLeft = 60;
-    }
+  rangeText.innerText = `Pick a number between 1 and ${maxRange}`;
 
-    // 🔥 Update UI dynamically
-    rangeText.innerText = `Pick a number between 1 and ${maxRange}`;
+  randomNum = Math.floor(Math.random() * maxRange) + 1;
+  attempts = 0;
+  score = 0;
+  low = 1;
+  high = maxRange;
 
-    randomNum = Math.floor(Math.random() * maxRange) + 1;
-    attempts = 0;
-    score = 0;
+  document.getElementById("message").innerText = "";
+  document.getElementById("attempts").innerText = "";
+  document.getElementById("score").innerText = "Score: 0";
+  const input = document.getElementById("guessInput");
+  input.disabled = false;
+  input.value = "";
 
-    document.getElementById("message").innerText = "";
-    document.getElementById("attempts").innerText = "";
-    document.getElementById("score").innerText = "Score: 0";
-    document.getElementById("guessInput").disabled = false;
-
-    startTimer();
+  startTimer();
 }
 
 // ⏱ Timer
 function startTimer() {
-    clearInterval(timerInterval);
+  clearInterval(timerInterval);
 
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        document.getElementById("timer").innerText = `⏱ Time Left: ${timeLeft}s`;
+  document.getElementById("timer").innerText = `⏱ Time Left: ${timeLeft}s`;
 
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            document.getElementById("message").innerText = "⏰ Time's up!";
-            document.getElementById("guessInput").disabled = true;
-        }
-    }, 1000);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = `⏱ Time Left: ${timeLeft}s`;
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      document.getElementById("message").innerText = "⏰ Time's up!";
+      document.getElementById("guessInput").disabled = true;
+    }
+  }, 1000);
 }
 
 // 🎮 Guess Logic
 function checkGuess() {
-    const input = document.getElementById("guessInput");
-    const message = document.getElementById("message");
-    const attemptsText = document.getElementById("attempts");
-    const scoreText = document.getElementById("score");
+  const input = document.getElementById("guessInput");
+  const message = document.getElementById("message");
+  const attemptsText = document.getElementById("attempts");
+  const scoreText = document.getElementById("score");
 
-    let guess = parseInt(input.value);
+  if (input.disabled) return;
 
-    if (isNaN(guess)) {
-        message.innerText = "❌ Enter a valid number!";
-        return;
-    }
+  let guess = parseInt(input.value, 10);
 
-    if (guess < 1 || guess > maxRange) {
-        message.innerText = `⚠️ Enter a number between 1 and ${maxRange}`;
-        return;
-    }
+  if (isNaN(guess)) {
+    message.innerText = "❌ Enter a valid number!";
+    return;
+  }
 
-    attempts++;
+  if (guess < 1 || guess > maxRange) {
+    message.innerText = `⚠️ Enter a number between 1 and ${maxRange}`;
+    return;
+  }
 
-    if (guess < randomNum) {
-        low = guess;
-        message.innerText = "📉 Too low!";
-        message.style.color = "orange";
-        wrongSound.play();
-        shake(input);
-    } 
-    else if (guess > randomNum) {
-        high = guess;
-        message.innerText = "📈 Too high!";
-        message.style.color = "red";
-        wrongSound.play();
-        shake(input);
-    } 
-    else {
-        message.innerText = `🎉 Correct! Number was ${randomNum}`;
-        message.style.color = "green";
-        correctSound.play();
+  attempts++;
 
-        score = Math.max(0, 100 - attempts * 5);
-        scoreText.innerText = `Score: ${score}`;
+  if (guess < randomNum) {
+    low = guess;
+    message.innerText = `📉 Too low! Try between ${low} and ${high}`;
+    message.style.color = "orange";
+    playSafe(wrongSound);
+    shake(input);
+  } else if (guess > randomNum) {
+    high = guess;
+    message.innerText = `📈 Too high! Try between ${low} and ${high}`;
+    message.style.color = "red";
+    playSafe(wrongSound);
+    shake(input);
+  } else {
+    message.innerText = `🎉 Correct! Number was ${randomNum}`;
+    message.style.color = "green";
+    playSafe(correctSound);
 
-        saveBestScore(score);
+    score = Math.max(0, 100 - attempts * 5);
+    scoreText.innerText = `Score: ${score}`;
 
-        clearInterval(timerInterval);
-        input.disabled = true;
-        return;
-    }
+    saveBestScore(score);
 
-    // 🔥 Close Hint
-    if (Math.abs(guess - randomNum) <= 5) {
-        message.innerText += " 🔥 Very close!";
-    }
+    clearInterval(timerInterval);
+    input.disabled = true;
+    return;
+  }
 
-    // 🧠 Bonus Hint after 8 attempts
-    if (attempts === 8) {
-        if (randomNum % 2 === 0) {
-            message.innerText += " 💡 Hint: Number is EVEN";
-        } else {
-            message.innerText += " 💡 Hint: Number is ODD";
-        }
-    }
+  // 🔥 Close hint
+  if (Math.abs(guess - randomNum) <= 5) {
+    message.innerText += " 🔥 Very close!";
+  }
 
-    attemptsText.innerText = `Attempts: ${attempts}`;
-    input.value = "";
+  // 🧠 Bonus hint after 8 attempts
+  if (attempts === 8) {
+    message.innerText += randomNum % 2 === 0 ? " 💡 Hint: Number is EVEN" : " 💡 Hint: Number is ODD";
+  }
+
+  attemptsText.innerText = `Attempts: ${attempts}`;
+  input.value = "";
+  input.focus();
 }
 
 // 🏆 Save Best Score
 function saveBestScore(currentScore) {
-    let best = localStorage.getItem("bestScore") || 0;
+  let best = Number(localStorage.getItem("bestScore")) || 0;
 
-    if (currentScore > best) {
-        localStorage.setItem("bestScore", currentScore);
-        alert("🏆 New High Score!");
-    }
+  if (currentScore > best) {
+    localStorage.setItem("bestScore", currentScore);
+    alert("🏆 New High Score!");
+  }
 }
 
 // 🔄 Restart
 function restartGame() {
-    clearInterval(timerInterval);
-    startGame();
+  clearInterval(timerInterval);
+  startGame();
 }
 
 // 🎨 Shake Animation
 function shake(element) {
-    element.style.transition = "0.1s";
-    element.style.transform = "translateX(-5px)";
-    setTimeout(() => {
-        element.style.transform = "translateX(5px)";
-    }, 100);
-    setTimeout(() => {
-        element.style.transform = "translateX(0)";
-    }, 200);
+  element.style.transition = "0.1s";
+  element.style.transform = "translateX(-5px)";
+  setTimeout(() => { element.style.transform = "translateX(5px)"; }, 100);
+  setTimeout(() => { element.style.transform = "translateX(0)"; }, 200);
 }
 
 // 🌙 Dark Mode
 function toggleDarkMode() {
-    document.body.classList.toggle("dark");
-
-    const btn = document.querySelector(".toggle-btn");
-    if (document.body.classList.contains("dark")) {
-        btn.innerText = "☀️";
-    } else {
-        btn.innerText = "🌙";
-    }
+  document.body.classList.toggle("dark");
+  const btn = document.querySelector(".toggle-btn");
+  btn.innerText = document.body.classList.contains("dark") ? "☀️" : "🌙";
 }
 
-
-const difficultySelect = document.getElementById("difficulty");
-const rangeText = document.getElementById("rangeText");
-
-difficultySelect.addEventListener("change", function () {
-    let selected = this.value;
-    let tempRange;
-
-    if (selected === "easy") {
-        tempRange = 50;
-    } else if (selected === "medium") {
-        tempRange = 100;
-    } else {
-        tempRange = 500;
-    }
-
-    // 🔥 Instant UI update
-    rangeText.innerText = `Pick a number between 1 and ${tempRange}`;
-});
-
+// 📘 Rules Modal
 function openRules() {
-    document.getElementById("rulesModal").style.display = "block";
+  document.getElementById("rulesModal").style.display = "block";
 }
 
 function closeRules() {
-    document.getElementById("rulesModal").style.display = "none";
+  document.getElementById("rulesModal").style.display = "none";
 }
 
-// Close when clicking outside
-window.onclick = function(event) {
-    const modal = document.getElementById("rulesModal");
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
+window.onclick = function (event) {
+  const modal = document.getElementById("rulesModal");
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
 };
 
-let low = 1;
-let high = maxRange;
+// 🎚 Difficulty preview text before starting
+const difficultySelect = document.getElementById("difficulty");
+const rangeTextEl = document.getElementById("rangeText");
 
-if (guess < randomNum) {
-    low = guess;
-    message.innerText = `📉 Too low! Try between ${low} and ${high}`;
-} else if (guess > randomNum) {
-    high = guess;
-    message.innerText = `📈 Too high! Try between ${low} and ${high}`;
-}
-
-// 🔥 Close hint
-if (Math.abs(guess - randomNum) <= 10) {
-    message.innerText += " 🔥 Very close!";
-}
+difficultySelect.addEventListener("change", function () {
+  let tempRange = this.value === "easy" ? 50 : this.value === "medium" ? 100 : 500;
+  rangeTextEl.innerText = `Pick a number between 1 and ${tempRange}`;
+});
 
 // ⌨️ Enter Support
-document.getElementById("guessInput").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") {
-        checkGuess();
-    }
+document.getElementById("guessInput").addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    checkGuess();
+  }
 });
